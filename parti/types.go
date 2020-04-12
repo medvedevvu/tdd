@@ -7,7 +7,7 @@ type Dollar struct {
 
 //Dollar constructor
 func NewDollar(amount int) *Dollar {
-	return nil
+	return &Dollar{amount: amount}
 }
 
 // Multyplication
