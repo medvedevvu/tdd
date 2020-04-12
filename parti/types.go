@@ -12,5 +12,5 @@ func NewDollar(amount int) *Dollar {
 
 // Multyplication
 func (d *Dollar) times(tm int) {
-
+	d.amount *= tm
 }
