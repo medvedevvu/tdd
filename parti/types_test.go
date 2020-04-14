@@ -12,18 +12,17 @@ func TestMultiplication(t *testing.T) {
 	}
 }
 
+// We have an equals operation now and can change previous tests
 func TestWithNewTimesMultiplication(t *testing.T) {
 	five := NewDollar(5)
 	product := five.times(2)
-	if product.amount != 10 {
-		t.Fatalf("%v not equal 10 ", product.amount)
+	if product.equals(five) {
+		t.Fatalf("%v equal %v ", product.amount, five.amount)
 	}
-	product = five.times(3)
-	if product.amount != 15 {
-		t.Fatalf(" %v not equal 15 ", product.amount)
+	if product.equals(five.times(3)) {
+		t.Fatalf(" %v equal %v ", product.amount, five.amount)
 	}
 }
-
 func TestEquality(t *testing.T) {
 	d5 := NewDollar(5)
 	dOther5 := NewDollar(5)

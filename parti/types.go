@@ -16,5 +16,5 @@ func (d *Dollar) times(tm int) *Dollar {
 }
 
 func (d *Dollar) equals(d1 *Dollar) bool {
-	return d.amount == d1.amount
+	return (*d).amount == (*d1).amount
 }
