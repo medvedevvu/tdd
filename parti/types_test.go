@@ -34,3 +34,13 @@ func TestEquality(t *testing.T) {
 	}
 
 }
+
+func TestFrancMultiplication(t *testing.T) {
+	five := NewFranc(5)
+	if !five.times(2).equals(NewFranc(10)) {
+		t.Fatalf(" %v not equal %v ", five.times(2), NewFranc(10))
+	}
+	if !five.times(3).equals(NewFranc(15)) {
+		t.Fatalf(" %v not equal %v ", five.times(3), NewFranc(15))
+	}
+}
