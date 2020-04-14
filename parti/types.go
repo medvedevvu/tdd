@@ -1,41 +1,29 @@
 package parti
 
-//Franc
-type Franc struct {
-	amount int
+// MonyType general type
+type MonyType uint8
+
+// Mony types
+const (
+	Franc MonyType = iota
+	Dollar
+)
+
+type Mony struct {
+	monytype MonyType
+	amount   int
 }
 
-//Dollar constructor
-func NewFranc(amount int) *Franc {
-	return &Franc{amount: amount}
-}
-
-// Multyplication
-func (f *Franc) times(tm int) *Franc {
-	return NewFranc(f.amount * tm)
-}
-
-//equals
-func (f *Franc) equals(f1 *Franc) bool {
-	return (*f).amount == (*f1).amount
-}
-
-//Dollar
-type Dollar struct {
-	amount int
-}
-
-//Dollar constructor
-func NewDollar(amount int) *Dollar {
-	return &Dollar{amount: amount}
+func NewMony(monytype MonyType, amount int) *Mony {
+	return &Mony{monytype: monytype, amount: amount}
 }
 
 // Multyplication
-func (d *Dollar) times(tm int) *Dollar {
-	return NewDollar(d.amount * tm)
+func (f *Mony) times(tm int) *Mony {
+	return NewMony(f.monytype, f.amount*tm)
 }
 
 //equals
-func (d *Dollar) equals(d1 *Dollar) bool {
-	return (*d).amount == (*d1).amount
+func (f *Mony) equals(f1 *Mony) bool {
+	return (*f).amount == (*f1).amount && f.monytype == f1.monytype
 }
