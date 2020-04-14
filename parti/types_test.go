@@ -6,9 +6,8 @@ import (
 
 func TestMultiplication(t *testing.T) {
 	five := NewDollar(5)
-	five.times(2)
-	if five.amount != 10 {
-		t.Fatalf(" not equal 10 ")
+	if five.equals(five.times(2)) {
+		t.Fatalf(" %v equal %v ", five.amount, five.times(2).amount)
 	}
 }
 
