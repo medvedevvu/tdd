@@ -14,3 +14,7 @@ func NewDollar(amount int) *Dollar {
 func (d *Dollar) times(tm int) *Dollar {
 	return NewDollar(d.amount * tm)
 }
+
+func (d *Dollar) equals(d1 *Dollar) bool {
+	return d.amount == d1.amount
+}
