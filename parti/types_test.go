@@ -61,3 +61,22 @@ func TestMonyEquals(t *testing.T) {
 	}
 
 }
+
+func TestSimpleAddition(t *testing.T) {
+	fiveDollar := NewMony(Dollar, 5)
+	moreFiveDollar := NewMony(Dollar, 5)
+	sum := fiveDollar.plus(moreFiveDollar)
+	if !sum.equals(NewMony(Dollar, 10)) {
+		t.Fatalf("%v != %v \n", sum, NewMony(Dollar, 10))
+	}
+}
+
+func TestSimpleAdditionWithBank(t *testing.T) {
+	five := dollar(5)
+	var sum Expression = Expression(*five.plus(five))
+	bank := NewBank()
+	reduced := bank.reduce(sum, Dollar)
+	if !dollar(5).equals(reduced) {
+		t.Fail()
+	}
+}
