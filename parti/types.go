@@ -47,19 +47,33 @@ func franc(amount int) *Mony {
 	return NewMony(Franc, amount)
 }
 
-type Expression Mony
-
-func (ex *Expression) plus(addend Mony) *Mony {
-	return NewMony(ex.monytype, ex.amount+addend.amount)
+func (ex *Mony) plus2(addend *Mony) *Sum {
+	return NewSum(ex, addend)
 }
 
 type Bank struct {
+	rate int
 }
 
 func NewBank() *Bank {
-	return &Bank{}
+	return &Bank{rate: 1}
 }
 
-func (bank Bank) reduce(source Expression, to MonyType) *Mony {
-	return dollar(10)
+func (bank Bank) reduce(source *Sum, to MonyType) *Mony {
+	return NewMony(to, source.addend.amount+source.augend.amount)
+}
+
+func (bank *Bank) AddRate(frm MonyType, to MonyType, rate int) {
+	bank.rate = rate
+}
+
+//Sum
+type Sum struct {
+	augend *Mony
+	addend *Mony
+}
+
+//Sum constructor
+func NewSum(augend *Mony, addend *Mony) *Sum {
+	return &Sum{augend: augend, addend: addend}
 }

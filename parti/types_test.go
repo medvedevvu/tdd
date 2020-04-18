@@ -80,7 +80,7 @@ func TestOtherSimpleAddition(t *testing.T) {
 
 func TestWithBankSimpleAddition(t *testing.T) {
 	var five *Mony = dollar(5)
-	var sum Expression = Expression(*five.plus(five))
+	sum := five.plus2(five)
 	var bank *Bank = NewBank()                   // создадим объект банк
 	var reduced *Mony = bank.reduce(sum, Dollar) // слабое связывание
 	if !dollar(10).equals(reduced) {
@@ -90,13 +90,22 @@ func TestWithBankSimpleAddition(t *testing.T) {
 
 func TestPlusReturnsSum(t *testing.T) {
 	five := dollar(5)
-	var result Expression = Expression(*five.plus(five))
-	var sum Sum = Sum(result)
+	result := five.plus2(five)
+	var sum *Sum = result
 	if !five.equals(sum.augend) {
 		t.Fatalf("%v  not equal %v \n", five, sum.augend)
 	}
 	if !five.equals(sum.addend) {
 		t.Fatalf("%v  not equal %v \n", five, sum.addend)
 	}
+}
 
+func TestReduceMoneyDifferentCurrency(t *testing.T) {
+	bank := NewBank()
+	bank.AddRate(Franc, Dollar, 2)
+	sum := NewSum(franc(2), franc(0))
+	var result *Mony = bank.reduce(sum, Dollar)
+	if !result.equals(dollar(1)) {
+		t.Fatalf("%v  not equal %v \n", result, dollar(1))
+	}
 }
