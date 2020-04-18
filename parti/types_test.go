@@ -87,3 +87,16 @@ func TestWithBankSimpleAddition(t *testing.T) {
 		t.Fatalf("%v  not equal %v \n", sum, NewMony(Dollar, 10))
 	}
 }
+
+func TestPlusReturnsSum(t *testing.T) {
+	five := dollar(5)
+	var result Expression = Expression(*five.plus(five))
+	var sum Sum = Sum(result)
+	if !five.equals(sum.augend) {
+		t.Fatalf("%v  not equal %v \n", five, sum.augend)
+	}
+	if !five.equals(sum.addend) {
+		t.Fatalf("%v  not equal %v \n", five, sum.addend)
+	}
+
+}
