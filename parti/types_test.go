@@ -71,12 +71,19 @@ func TestSimpleAddition(t *testing.T) {
 	}
 }
 
-func TestSimpleAdditionWithBank(t *testing.T) {
-	five := dollar(5)
+func TestOtherSimpleAddition(t *testing.T) {
+	sum := dollar(5).plus(dollar(5))
+	if !sum.equals(NewMony(Dollar, 10)) {
+		t.Fatalf("%v  not equal %v \n", sum, NewMony(Dollar, 10))
+	}
+}
+
+func TestWithBankSimpleAddition(t *testing.T) {
+	var five *Mony = dollar(5)
 	var sum Expression = Expression(*five.plus(five))
-	bank := NewBank()
-	reduced := bank.reduce(sum, Dollar)
-	if !dollar(5).equals(reduced) {
-		t.Fail()
+	var bank *Bank = NewBank()                   // создадим объект банк
+	var reduced *Mony = bank.reduce(sum, Dollar) // слабое связывание
+	if !dollar(10).equals(reduced) {
+		t.Fatalf("%v  not equal %v \n", sum, NewMony(Dollar, 10))
 	}
 }

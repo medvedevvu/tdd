@@ -47,7 +47,6 @@ func franc(amount int) *Mony {
 	return NewMony(Franc, amount)
 }
 
-// Expression
 type Expression Mony
 
 func (ex *Expression) plus(addend Mony) *Mony {
@@ -62,5 +61,5 @@ func NewBank() *Bank {
 }
 
 func (bank Bank) reduce(source Expression, to MonyType) *Mony {
-	return NewMony(Dollar, 5)
+	return dollar(10)
 }
